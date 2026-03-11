@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -38,6 +39,9 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tutorialGroup;
+    @FXML
+    private GridPane attendanceTable;
+    private AttendanceTable attendanceTableManager;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -51,5 +55,24 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().forEach(tag -> tutorialGroup.getChildren().add(new Label(tag.tagName)));
+        attendanceTableManager = new AttendanceTable(attendanceTable);
+    }
+
+    /**
+     * Sets the attendance status for a specific week.
+     * @param week Week number (1-13)
+     * @param status "present" (green), "absent" (red), or "default" (grey)
+     */
+    public void setAttendanceStatus(int week, String status) {
+        attendanceTableManager.setAttendanceStatus(week, status);
+    }
+
+    /**
+     * Sets the attendance color for a specific week directly.
+     * @param week Week number (1-13)
+     * @param color Hex color code (e.g., "#90EE90" for green)
+     */
+    public void setAttendanceColor(int week, String color) {
+        attendanceTableManager.setAttendanceColor(week, color);
     }
 }
