@@ -124,11 +124,12 @@ Examples:
 *  `edit 1 p/91234567 e/alice_new@u.nus.edu` Edits the phone number and email address of the 1st student.
 *  `edit 2 t/T03` Moves the 2nd student to tutorial group `T03`.
 
-### Locating persons by name: `find`
+### Locating persons by name or tutorial group: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords and/or belong to the specified
+tutorial group(s).
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME_KEYWORD [MORE_KEYWORDS]...] [t/TUTORIAL_GROUP]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -138,9 +139,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find t/T01` returns all students in tutorial group T01
+* `find n/alex t/T01` returns students named Alex in tutorial group T01
 
 ### Deleting a person : `delete`
 
