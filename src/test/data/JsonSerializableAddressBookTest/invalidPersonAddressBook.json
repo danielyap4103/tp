@@ -3,7 +3,8 @@
     "name": "Hans Muster",
     "studentId": "A0123456X",
     "email": "invalid-email",
-    "phone": "9482424",
-    "teleHandle": "@hans_muster"
+    "phone": "94824240",
+    "teleHandle": "@hans_muster",
+    "tutorialGroup": "T01"
   } ]
 }

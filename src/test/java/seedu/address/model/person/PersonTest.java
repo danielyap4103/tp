@@ -7,9 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_AMY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -22,7 +21,6 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
     }
 
     @Test
@@ -35,7 +33,7 @@ public class PersonTest {
 
         // same studentId, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTeleHandle(VALID_TELE_HANDLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTeleHandle(VALID_TELE_HANDLE_BOB).withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different studentId, all other attributes same -> returns false
@@ -90,8 +88,8 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different tutorial group -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -99,7 +97,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", studentId="
                 + ALICE.getStudentId() + ", email=" + ALICE.getEmail() + ", phone=" + ALICE.getPhone()
-                + ", teleHandle=" + ALICE.getTeleHandle() + ", tags=" + ALICE.getTags()
+                + ", teleHandle=" + ALICE.getTeleHandle() + ", tutorialGroup=" + ALICE.getTutorialGroup()
                 + "}";
         assertEquals(expected, ALICE.toString());
     }

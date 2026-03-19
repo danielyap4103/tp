@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -40,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label studentId;
     @FXML
-    private FlowPane tutorialGroup;
+    private Label tutorialGroup;
     @FXML
     private GridPane attendanceTable;
     private AttendanceTable attendanceTableManager;
@@ -57,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         phone.setText(person.getPhone().value);
         teleHandle.setText(person.getTeleHandle().value);
-        person.getTags().forEach(tag -> tutorialGroup.getChildren().add(new Label(tag.tagName)));
+        tutorialGroup.setText(person.getTutorialGroup().value);
         attendanceTableManager = new AttendanceTable(attendanceTable);
     }
 

@@ -2,8 +2,9 @@
   "persons": [ {
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "studentId": "A0123456X",
-    "email": "hans@example.com",
-    "phone": "9482424",
-    "teleHandle": "@invalid_name"
+    "email": "hans@u.nus.edu",
+    "phone": "94824240",
+    "teleHandle": "@invalid_name",
+    "tutorialGroup": "T01"
   } ]
 }

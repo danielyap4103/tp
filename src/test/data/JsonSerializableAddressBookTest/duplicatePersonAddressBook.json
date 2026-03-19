@@ -5,12 +5,13 @@
     "email": "alice@u.nus.edu",
     "phone": "94351253",
     "teleHandle": "@alice_pauline",
-    "tags": [ "T01" ]
+    "tutorialGroup": "T01"
   }, {
     "name": "Alice Pauline",
     "studentId": "A0123456A",
     "email": "pauline@u.nus.edu",
     "phone": "94351253",
-    "teleHandle": "@alice_pauline2"
+    "teleHandle": "@alice_pauline2",
+    "tutorialGroup": "T02"
   } ]
 }

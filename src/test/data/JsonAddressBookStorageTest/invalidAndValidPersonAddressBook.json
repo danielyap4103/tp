@@ -2,14 +2,16 @@
   "persons": [ {
     "name": "Valid Person",
     "studentId": "A0123456X",
-    "email": "hans@example.com",
-    "phone": "9482424",
-    "teleHandle": "@valid_person"
+    "email": "hans@u.nus.edu",
+    "phone": "94824240",
+    "teleHandle": "@valid_person",
+    "tutorialGroup": "T01"
   }, {
     "name": "Person With Invalid Phone Field",
-    "studentId": "B0123456Y",
-    "email": "hans@example.com",
+    "studentId": "A0123456Y",
+    "email": "hans@u.nus.edu",
     "phone": "948asdf2424",
-    "teleHandle": "@invalid_phone"
+    "teleHandle": "@invalid_phone",
+    "tutorialGroup": "T02"
   } ]
 }

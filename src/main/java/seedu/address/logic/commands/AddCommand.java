@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,15 +28,14 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_TELE_HANDLE + "TELE_HANDLE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_STUDENT_ID + "A0123456X "
             + PREFIX_EMAIL + "johnd@u.nus.edu "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TELE_HANDLE + "@john_doe "
-            + PREFIX_TAG + "T01 "
-            + PREFIX_TAG + "T02";
+            + PREFIX_TUTORIAL_GROUP + "T01";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -69,7 +68,6 @@ public class AddCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddCommand)) {
             return false;
         }

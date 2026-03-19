@@ -1,16 +1,12 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.person.TutorialGroup;
 
 /**
  * A utility class to help with building Person objects.
@@ -22,13 +18,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@u.nus.edu";
     public static final String DEFAULT_TELE_HANDLE = "@amybee";
     public static final String DEFAULT_STUDENT_ID = "A0123456X";
+    public static final String DEFAULT_TUTORIAL_GROUP = "T01";
 
     private Name name;
     private Phone phone;
     private Email email;
     private TeleHandle teleHandle;
     private StudentId studentId;
-    private Set<Tag> tags;
+    private TutorialGroup tutorialGroup;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,7 +36,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         teleHandle = new TeleHandle(DEFAULT_TELE_HANDLE);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
-        tags = new HashSet<>();
+        tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
     }
 
     /**
@@ -51,7 +48,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         phone = personToCopy.getPhone();
         teleHandle = personToCopy.getTeleHandle();
-        tags = new HashSet<>(personToCopy.getTags());
+        tutorialGroup = personToCopy.getTutorialGroup();
     }
 
     /**
@@ -63,10 +60,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the {@code TutorialGroup} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withTutorialGroup(String tutorialGroup) {
+        this.tutorialGroup = new TutorialGroup(tutorialGroup);
         return this;
     }
 
@@ -103,7 +100,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, teleHandle, studentId, tags);
+        return new Person(name, phone, email, teleHandle, studentId, tutorialGroup);
     }
 
 }

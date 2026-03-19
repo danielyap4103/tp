@@ -5,16 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -28,7 +25,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TutorialGroup;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -46,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_STUDENT_ID + "A0123456X "
@@ -94,10 +91,6 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -106,9 +99,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         TeleHandle updatedTeleHandle = editPersonDescriptor.getTeleHandle().orElse(personToEdit.getTeleHandle());
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        TutorialGroup updatedTutorialGroup = editPersonDescriptor.getTutorialGroup()
+                .orElse(personToEdit.getTutorialGroup());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTeleHandle, updatedStudentId, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTeleHandle, updatedStudentId,
+                updatedTutorialGroup);
     }
 
     @Override
@@ -117,7 +112,6 @@ public class EditCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof EditCommand)) {
             return false;
         }
@@ -145,13 +139,12 @@ public class EditCommand extends Command {
         private Email email;
         private TeleHandle teleHandle;
         private StudentId studentId;
-        private Set<Tag> tags;
+        private TutorialGroup tutorialGroup;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -159,14 +152,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setPhone(toCopy.phone);
             setTeleHandle(toCopy.teleHandle);
-            setTags(toCopy.tags);
+            setTutorialGroup(toCopy.tutorialGroup);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, teleHandle, studentId, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, teleHandle, studentId, tutorialGroup);
         }
 
         public void setName(Name name) {
@@ -209,21 +202,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentId);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTutorialGroup(TutorialGroup tutorialGroup) {
+            this.tutorialGroup = tutorialGroup;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<TutorialGroup> getTutorialGroup() {
+            return Optional.ofNullable(tutorialGroup);
         }
 
         @Override
@@ -232,7 +216,6 @@ public class EditCommand extends Command {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
@@ -243,7 +226,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(teleHandle, otherEditPersonDescriptor.teleHandle)
                     && Objects.equals(studentId, otherEditPersonDescriptor.studentId)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tutorialGroup, otherEditPersonDescriptor.tutorialGroup);
         }
 
         @Override
@@ -254,7 +237,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("phone", phone)
                     .add("teleHandle", teleHandle)
-                    .add("tags", tags)
+                    .add("tutorialGroup", tutorialGroup)
                     .toString();
         }
     }

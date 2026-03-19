@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,8 +57,8 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudentId(VALID_STUDENT_ID_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different tutorialGroup -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -70,8 +70,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getStudentId().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", teleHandle="
-                + editPersonDescriptor.getTeleHandle().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getTeleHandle().orElse(null) + ", tutorialGroup="
+                + editPersonDescriptor.getTutorialGroup().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

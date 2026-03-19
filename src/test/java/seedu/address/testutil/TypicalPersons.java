@@ -8,10 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,36 +28,42 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withTeleHandle("@alice_pauline").withEmail("alice@u.nus.edu")
             .withPhone("94351253").withStudentId("A0123456A")
-            .withTags("T01").build();
+            .withTutorialGroup("T01").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withTeleHandle("@benson_meier")
             .withEmail("johnd@u.nus.edu").withPhone("98765432").withStudentId("A0123456B")
-            .withTags("T02", "T01").build();
+            .withTutorialGroup("T02").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@u.nus.edu").withTeleHandle("@carl_kurz").withStudentId("A0123456C").build();
+            .withEmail("heinz@u.nus.edu").withTeleHandle("@carl_kurz").withStudentId("A0123456C")
+            .withTutorialGroup("T03").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@u.nus.edu").withTeleHandle("@daniel_meier").withStudentId("A0123456D")
-            .withTags("T01").build();
+            .withTutorialGroup("T01").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822240")
-            .withEmail("werner@u.nus.edu").withTeleHandle("@elle_meyer").withStudentId("A0123456E").build();
+            .withEmail("werner@u.nus.edu").withTeleHandle("@elle_meyer").withStudentId("A0123456E")
+            .withTutorialGroup("T04").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824270")
-            .withEmail("lydia@u.nus.edu").withTeleHandle("@fiona_kunz").withStudentId("A0123456F").build();
+            .withEmail("lydia@u.nus.edu").withTeleHandle("@fiona_kunz").withStudentId("A0123456F")
+            .withTutorialGroup("T05").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824420")
-            .withEmail("anna@u.nus.edu").withTeleHandle("@george_best").withStudentId("A0123456G").build();
+            .withEmail("anna@u.nus.edu").withTeleHandle("@george_best").withStudentId("A0123456G")
+            .withTutorialGroup("T06").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824240")
-            .withEmail("stefan@u.nus.edu").withTeleHandle("@hoon_meier").withStudentId("A0123456H").build();
+            .withEmail("stefan@u.nus.edu").withTeleHandle("@hoon_meier").withStudentId("A0123456H")
+            .withTutorialGroup("T07").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821310")
-            .withEmail("hans@u.nus.edu").withTeleHandle("@ida_mueller").withStudentId("A0123456I").build();
+            .withEmail("hans@u.nus.edu").withTeleHandle("@ida_mueller").withStudentId("A0123456I")
+            .withTutorialGroup("T08").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withTeleHandle(VALID_TELE_HANDLE_AMY).withStudentId(VALID_STUDENT_ID_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTeleHandle(VALID_TELE_HANDLE_BOB).withStudentId(VALID_STUDENT_ID_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
