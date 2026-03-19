@@ -3,10 +3,20 @@ layout: page
 title: Zi Shen's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: CLI-Tacts
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CLI-Tacts is a desktop application for CS2040S Teaching Assistants to manage students, tutorial groups, and attendance efficiently through a CLI, with a JavaFX GUI.
 
 Given below are my contributions to the project:
-updated the use case in the developer guide
-implemented the mark attendance function
+
+1. Mark command
+* Implemented the `mark` command to support attendance recording workflows.
+* Integrated attendance updates with command parsing and execution flow.
+
+2. Test cases
+* Added and updated test cases for attendance-related command behavior.
+* Improved reliability by covering expected success and failure paths.
+
+3. UI and attendance display
+* Focused on UI changes for attendance visualization.
+* Implemented and refined attendance display in the student card/list view.
