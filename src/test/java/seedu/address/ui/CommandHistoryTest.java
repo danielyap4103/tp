@@ -74,5 +74,26 @@ public class CommandHistoryTest {
         assertEquals("b", history.previous("draft2"));
         assertEquals("draft2", history.next("b"));
     }
+
+    @Test
+    public void next_whenNotNavigating_returnsDraftImmediately() {
+        CommandHistory history = new CommandHistory();
+        history.add("a");
+        history.add("b");
+
+        assertEquals("draft", history.next("draft"));
+    }
+
+    @Test
+    public void add_duringNavigation_exitsNavigation_andNewHistoryIsReachable() {
+        CommandHistory history = new CommandHistory();
+        history.add("a");
+        history.add("b");
+
+        assertEquals("b", history.previous("draft"));
+        history.add("c");
+
+        assertEquals("c", history.previous(""));
+    }
 }
 
