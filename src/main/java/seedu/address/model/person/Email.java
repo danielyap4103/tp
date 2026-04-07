@@ -11,8 +11,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final int MAX_LOCAL_PART_LENGTH = 50;
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@u.nus.edu "
         + "and adhere to the following constraints:\n"
         + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
@@ -22,12 +20,15 @@ public class Email {
         + "characters).\n"
         + "3. The local-part must be at most " + MAX_LOCAL_PART_LENGTH + " characters long.\n"
         + "4. The domain must be exactly u.nus.edu.";
+    public static final int MAX_LOCAL_PART_LENGTH = 50;
+    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + DOMAIN_REGEX;
+
+    private static final String SPECIAL_CHARACTERS = "+_.-";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+";
     private static final String LOCAL_PART_REGEX =
             "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_REGEX = "@u\\.nus\\.edu$";
-    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + DOMAIN_REGEX;
 
     public final String value;
 
