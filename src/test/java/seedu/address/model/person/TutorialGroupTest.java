@@ -25,7 +25,7 @@ public class TutorialGroupTest {
     @Test
     public void isValidTutorialGroup() {
         // null tutorial group
-        assertThrows(NullPointerException.class, () -> TutorialGroup.isValidTutorialGroup(null));
+        assertFalse(TutorialGroup.isValidTutorialGroup(null));
 
         // invalid tutorial groups
         assertFalse(TutorialGroup.isValidTutorialGroup(""));
@@ -49,11 +49,18 @@ public class TutorialGroupTest {
     }
 
     @Test
+    public void constructor_trimsAndUppercasesValue() {
+        assertEquals("T01", new TutorialGroup("  t01  ").value);
+        assertEquals("CS204", new TutorialGroup("cs204").value);
+    }
+
+    @Test
     public void equals() {
         TutorialGroup tutorialGroup = new TutorialGroup("T01");
 
         // same values -> returns true
         assertTrue(tutorialGroup.equals(new TutorialGroup("T01")));
+        assertTrue(tutorialGroup.equals(new TutorialGroup("t01")));
 
         // same object -> returns true
         assertTrue(tutorialGroup.equals(tutorialGroup));
@@ -72,5 +79,6 @@ public class TutorialGroupTest {
     public void hashCodeTest() {
         TutorialGroup tutorialGroup = new TutorialGroup("T01");
         assertEquals(tutorialGroup.hashCode(), new TutorialGroup("T01").hashCode());
+        assertEquals(tutorialGroup.hashCode(), new TutorialGroup("t01").hashCode());
     }
 }

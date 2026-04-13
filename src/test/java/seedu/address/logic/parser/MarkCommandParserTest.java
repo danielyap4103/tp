@@ -46,6 +46,8 @@ public class MarkCommandParserTest {
                 new MarkCommand(new TutorialGroup("T01"), 2));
         assertParseSuccess(parser, PREFIX_WEEK + "1 " + PREFIX_TUTORIAL_GROUP + "T02",
                 new MarkCommand(new TutorialGroup("T02"), 1));
+        assertParseSuccess(parser, PREFIX_TUTORIAL_GROUP + "t01 " + PREFIX_WEEK + "2",
+                new MarkCommand(new TutorialGroup("T01"), 2));
     }
 
     @Test

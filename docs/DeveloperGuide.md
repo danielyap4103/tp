@@ -630,7 +630,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Student id: The unique identifier for a student (e.g., A0123456X) used as the primary key for identifying a student in the application.
 
-* Tutorial group: A label used to group students by tutorial or lab session (3–5 alphanumeric characters; e.g., `T01`, `CS204`) for filtering and attendance marking/unmarking.
+* Tutorial group: A label used to group students by tutorial or lab session (3–5 alphanumeric characters; letter casing ignored on input, stored uppercase; e.g., `T01`, `CS204`) for filtering and attendance marking/unmarking.
 
 * Typical usage: Normal operation during a semester for a teaching assistant managing up to 200 students across multiple tutorial groups.
 
