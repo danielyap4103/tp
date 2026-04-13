@@ -49,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Parses name search terms: each {@code n/} value may contain several words separated by spaces.
+     * Parses name search terms: each {@code n\} value may contain several words separated by spaces.
      * Each word is a separate prefix; a person matches only if every prefix matches some word in their full name
      * (see {@link NameAndTutorialGroupPredicate}).
      */
@@ -60,7 +60,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (trimmedValue.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-            keywords.addAll(Arrays.asList(trimmedValue));
+            keywords.addAll(Arrays.asList(trimmedValue.split("\\s+")));
         }
         return keywords.stream().filter(value -> !value.isBlank()).collect(Collectors.toList());
     }
