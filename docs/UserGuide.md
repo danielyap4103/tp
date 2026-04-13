@@ -12,7 +12,7 @@ The primary users are **CS2040S Teaching Assistants** who:
 * prefer keyboard-driven workflows during lab sessions
 
 
-* Table of Contents
+## Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
