@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -163,7 +163,7 @@ The `find` command is parsed by [`FindCommandParser`](https://github.com/AY2526S
 **Name (`n\`)**
 
 * The parser collects **all** whitespace-separated tokens from every `n\` argument (multiple `n\` prefixes are merged the same way as multiple words in one `n\` value). Each token is one **keyword**.
-* In `NameAndTutorialGroupPredicate`, **every** keyword must match: for each keyword, [`StringUtil#containsWordPrefixIgnoreCase`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/commons/util/StringUtil.java) must be true for the person’s full name (the full name is split on whitespace into words; each keyword must be a non-empty prefix at the start of **at least one** word, case-insensitively). This is a logical **AND** across keywords. Mid-word substrings are not matched (e.g. `ohn` does not match `John`).
+* In `NameAndTutorialGroupPredicate`, **every** keyword must match: for each keyword, [`StringUtil#containsWordPrefixIgnoreCase`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/commons/util/StringUtil.java) must be true for the student's full name (the full name is split on whitespace into words; each keyword must be a non-empty prefix at the start of **at least one** word, case-insensitively). This is a logical **AND** across keywords. Mid-word substrings are not matched (e.g. `ohn` does not match `John`).
 
 **Other filters**
 
@@ -172,7 +172,7 @@ The `find` command is parsed by [`FindCommandParser`](https://github.com/AY2526S
 
 **Combining filters**
 
-* When `n\`, `t\`, `e\`, and/or `th\` are all present, a person must satisfy **every** non-empty category (logical AND across categories).
+* When `n\`, `t\`, `e\`, and/or `th\` are all present, a student must satisfy **every** non-empty category (logical AND across categories).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -198,7 +198,7 @@ The `find` command is parsed by [`FindCommandParser`](https://github.com/AY2526S
 * finds GUI-based portals/spreadsheets too slow for real-time classroom administration
 * needs to organize students by tutorial/lab session for quick lookup
 
-**Value proposition**: CLI-Tacts helps CS2040S Teaching Assistants manage student contacts and attendance quickly via CLI by centralising student details and tutorial groupings locally, enabling fast administrative actions (including marking and unmarking attendance) during tutorials without disrupting teaching flow.
+**Value proposition**: CLI-Tacts helps CS2040S Teaching Assistants manage students and attendance quickly via CLI by centralising student details and tutorial groupings locally, enabling fast administrative actions (including marking and unmarking attendance) during tutorials without disrupting teaching flow.
 
 ### User stories
 
@@ -206,11 +206,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​ | I want to …​ | So that I can…​ |
 | --- | --- | --- | --- |
-| `* * *` | CS2040S Teaching Assistant | add a student with name, student ID, email, phone, tele handle, and tutorial group | set up my tutorial groups at the start of the semester |
+| `* * *` | CS2040S Teaching Assistant | add a student with name, student ID, email, phone, Telegram handle, and tutorial group | set up my tutorial groups at the start of the semester |
 | `* * *` | CS2040S Teaching Assistant | edit a student’s contact details | keep records accurate when details change |
 | `* * *` | CS2040S Teaching Assistant | delete a student by their index in the displayed list | remove students who drop the module or switch classes |
 | `* * *` | CS2040S Teaching Assistant | find students by name (partial match) | locate a student quickly during class |
-| `* * *` | CS2040S Teaching Assistant | find students by tutorial group, email, or telegram handle | locate a student using different criteria |
+| `* * *` | CS2040S Teaching Assistant | find students by tutorial group, email, or Telegram handle | locate a student using different criteria |
 | `* * *` | CS2040S Teaching Assistant | combine multiple find filters in one command | narrow down student search results precisely |
 | `* * *` | CS2040S Teaching Assistant | list all students | get an overview of who is under my care |
 | `* * *` | CS2040S Teaching Assistant | filter the student list by tutorial group | focus only on the current class I'm teaching |
@@ -270,6 +270,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1b. User specifies multiple values for a single-valued field (e.g., `n\John n\Doe` or `i\A0123456X i\A0123456Y`).
+    * 1b1. CLI-Tacts shows an error message: "Multiple values specified for the following single-valued field(s): [field]".
+
+      Use case ends.
+
 * 2a. Any field has an invalid format (e.g., invalid name, invalid student ID, invalid email, invalid phone, invalid tutorial group, invalid Telegram handle).
     * 2a1. CLI-Tacts shows a specific error message describing the constraint violation.
 
@@ -317,6 +322,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. No field is provided for editing.
     * 3b1. CLI-Tacts shows an error message: "At least one field to edit must be provided."
+
+      Use case resumes at step 3.
+
+* 3c. User specifies multiple values for a single-valued field (e.g., `n\John n\Doe` or `p\98765432 p\87654321`).
+    * 3c1. CLI-Tacts shows an error message: "Multiple values specified for the following single-valued field(s): [field]".
 
       Use case resumes at step 3.
 
@@ -380,6 +390,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+* 3e. User specifies multiple values for a single-valued field (e.g., `w\1 w\2`).
+    * 3e1. CLI-Tacts shows an error message: "Multiple values specified for the following single-valued field(s): w\".
+
+      Use case resumes at step 2.
+
+      Use case resumes at step 2.
+
 **Use case: Mark tutorial group attendance**
 
 **MSS**
@@ -404,6 +421,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 3b. User specifies multiple values for a single-valued field (e.g., `w\1 w\2` or `t\T01 t\T02`).
+    * 3b1. CLI-Tacts shows an error message: "Multiple values specified for the following single-valued field(s): [field]".
+
+      Use case ends.
+
 * 4a. The week number is invalid (not between 1 and 13).
     * 4a1. CLI-Tacts shows an error message.
 
@@ -418,9 +440,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list students in a specific tutorial group.
-2. CLI-Tacts shows the list of students for that group.
-3. User requests to unmark a specific student by index and the specific week.
+1. User requests to view students (e.g. `list` or `find`).
+2. CLI-Tacts shows the filtered student list with indexes.
+3. User requests to unmark a specific student using `unmark INDEX w\WEEK`.
 4. CLI-Tacts updates the attendance record for that student.
 5. CLI-Tacts confirms the attendance status change.
 
@@ -428,21 +450,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-1a. The specified tutorial group does not exist.
-   1a1. CLI-Tacts shows an error message.
+* 2a. The list is empty.
 
-   Use case ends.
+  Use case ends.
 
-3a. The user provides an invalid index or week.
-   3a1. CLI-Tacts shows an error message.
+* 3a. The user provides an invalid index or week.
+  * 3a1. CLI-Tacts shows an error message.
 
    Use case resumes at step 2.
 
-3b. User wants to unmark the entire group (bulk action).
-   3b1. User enters a bulk command (e.g., `unmark t\T01 w\2`).
-   3b2. CLI-Tacts updates every student in storage with that tutorial group who was marked for that week; already-unmarked students are skipped.
+* 3b. The student has already been unmarked for the specified week.
+  * 3b1. CLI-Tacts shows an error message: "This student has already been unmarked as attended for this week."
+
+   Use case resumes at step 2.
+
+* 3c. User specifies multiple values for a single-valued field (e.g., `w\1 w\2`).
+  * 3c1. CLI-Tacts shows an error message: "Multiple values specified for the following single-valued field(s): w\".
+
+   Use case resumes at step 2.
+
+**Use case: Unmark tutorial group attendance**
+
+**MSS**
+
+1. User requests to unmark all students in a tutorial group for a specific week (e.g., `unmark t\T01 w\2`).
+2. CLI-Tacts validates the tutorial group format (3–5 alphanumeric characters).
+3. CLI-Tacts checks that at least one student exists with that tutorial group in storage.
+4. CLI-Tacts unmarks each student in that tutorial group for the specified week; students already unmarked for that week are skipped without error.
+5. CLI-Tacts confirms the action and reports: how many students were updated and how many were already unmarked for that week.
 
    Use case ends.
+
+**Extensions**
+
+* 2a. The tutorial group format is invalid (e.g., `t\T1` or `t\T01234` or `t\T-01`).
+    * 2a1. CLI-Tacts shows an error message describing the valid format.
+
+      Use case ends.
+
+* 3a. No student in storage has the specified tutorial group.
+    * 3a1. CLI-Tacts shows an error message: "No students found in tutorial group X."
+
+      Use case ends.
+
+* 3b. User specifies multiple values for a single-valued field (e.g., `w\1 w\2` or `t\T01 t\T02`).
+    * 3b1. CLI-Tacts shows an error message: "Multiple values specified for the following single-valued field(s): [field]".
+
+      Use case ends.
+
+* 4a. The week number is invalid (not between 1 and 13).
+    * 4a1. CLI-Tacts shows an error message.
+
+      Use case resumes at step 1.
+
+* 4b. All students in the group are already unmarked for that week.
+    * 4b1. CLI-Tacts reports that 0 students were updated and all were already unmarked.
+
+      Use case ends.
 
 **Use case: Find students**
 
@@ -622,6 +686,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Student id: The unique identifier for a student (e.g., A0123456X) used as the primary key for identifying a student in the application.
 
+* Telegram: A cloud-based instant messaging application. In CLI-Tacts, students can have an optional Telegram handle (@-prefixed username, 5–32 characters) for contact purposes.
+
 * Tutorial group: A label used to group students by tutorial or lab session (3–5 alphanumeric characters; letter casing ignored on input, stored uppercase; e.g., `T01`, `CS204`) for filtering and attendance marking/unmarking.
 
 * User guide: The documentation that explains how to use the application's commands and features.
@@ -645,7 +711,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample students. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -663,7 +729,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
@@ -687,4 +753,4 @@ testers are expected to do more *exploratory* testing.
 
 **Team size:** 5
 
-1. **Allow clearing a student’s Telegram handle via `edit`:** Telegram is optional on `add`, but once a handle is saved there is still no supported way to remove it from the CLI. **Current behaviour (v1.6):** If the user supplies the prefix with **no value** after it (e.g. `edit 3 th\` or only spaces, after trimming), the app still feeds that argument through `TeleHandle` validation. The empty string is invalid, so the command **fails** and the status area shows: `Telegram handle should start with '@' followed by 5 to 32 characters (letters, numbers, underscores).` The student’s Telegram field is **unchanged** The only workarounds are to replace the handle with another valid one or to edit the JSON data file manually. **Planned change:** Treat a present `th\` prefix with a **trimmed-empty** value as an explicit instruction to **clear** the handle (store as absent / null, same as a student who never had one). Non-empty values will still use existing validation (e.g. `th\@` alone remains invalid). **Sample input (after fix):** `edit 3 th\` for a student who had `th\@alice_ta`. **Sample outcome:** Success message; Telegram hidden in the UI; save omits `teleHandle` in JSON. Update the User Guide with the new rule and example.
+1. **Allow clearing a student’s Telegram handle via `edit`:** Telegram is optional on `add`, but once a handle is saved there is still no supported way to remove it from the CLI. **Current behaviour (v1.6):** If the user supplies the prefix with **no value** after it (e.g. `edit 3 th\` or only spaces, after trimming), the app still feeds that argument through `TeleHandle` validation. The empty string is invalid, so the command **fails** and the status area shows: `Telegram handle should start with '@' followed by 5 to 32 characters (letters, numbers, underscores).` The student’s Telegram field is **unchanged** The only workarounds are to replace the handle with another valid one or to edit the JSON data file manually. **Planned change:** Treat a present `th\` prefix with a **trimmed-empty** value as an explicit instruction to **clear** the handle (store as absent / null, same as a student who never had one). Non-empty values will still use existing validation (e.g. `th\@` alone remains invalid). **Sample input (after fix):** `edit 3 th\` for a student who had `th\@alice_ta`. **Sample outcome:** Success message; Telegram hidden in the UI; save omits `TeleHandle` in JSON. Update the User Guide with the new rule and example.
